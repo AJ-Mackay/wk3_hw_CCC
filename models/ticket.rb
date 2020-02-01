@@ -18,4 +18,41 @@ def save()
   @id = ticket['id'].to_i
 end
 
+def update()
+  sql = "UPDATE tickets SET (customer_id, film_id) = ($1, $2) WHERE id = $3"
+  values = [@customer_id, @film_id, @id]
+  SqlRunner.run(sql, values)
+end
+
+def delete()
+  sql = "DELETE FROM tickets WHERE id = $1"
+  values = [@id]
+  SqlRunner.run(sql, values)
+end
+
+def customer()
+  sql = "SELECT * FROM customers WHERE id = $1"
+  values = [@customer_id]
+  customer = SqlRunner.run(sql, values).first
+  return Customer.new(customer)
+end
+
+def film()
+  sql = "SELECT * FROM films WHERE id = $1"
+  values = [@film_id]
+  film = SqlRunner.run(sql, values).first
+  return Film.new(film)
+end
+
+def self.all()
+  sql = "SELECT * FROM tickets"
+  data = SqlRunner.run(sql)
+  return data.map{|ticket| Ticket.new(ticket)}
+end
+
+def self.delete_all()
+  sql = "DELETE FROM tickets"
+  SqlRunner.run(sql)
+end
+
 end
