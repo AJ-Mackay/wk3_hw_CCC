@@ -48,4 +48,11 @@ class Film
     SqlRunner.run(sql)
   end
 
+def self.find(id)
+  sql = "SELECT * FROM films WHERE id = $1"
+  values = [id]
+  sql_film = SqlRunner.run(sql, values)
+  return sql_film.map{|film|Film.new(film)}
+end
+
 end
