@@ -31,15 +31,16 @@ SqlRunner.run(sql, values)
 end
 
 def films()
-  sql = "SELECT films.* FROM films INNER JOIN tickets ON films.id = tickets.films_id WHERE customer_id = $1"
+  sql = "SELECT films.* FROM films INNER JOIN tickets ON films.id = tickets.film_id WHERE customer_id = $1"
   values = [@id]
-  film = SqlRunner.run(sql)
-  return Film.map{|customer|Customer.new(customer)}
+  sql_films = SqlRunner.run(sql, values)
+  return sql_films.map{|film|Film.new(film)}
 end
 
 def self.all()
   sql = "SELECT * FROM customers"
-SqlRunner.run(sql)
+sql_customers = SqlRunner.run(sql)
+return sql_customers.map{|customer|Customer.new(customer)}
 end
 
 def self.delete_all()
