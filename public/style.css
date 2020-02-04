@@ -1,0 +1,14 @@
+body {
+  background-color: #000;
+  color: #FFF;
+  text-align: center;
+}
+
+h1 {
+  color: #D1462F;
+  height: 2em;
+}
+
+ul {
+  list-style: none;
+}

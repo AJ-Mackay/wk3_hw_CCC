@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>~ Sinatra Revival House ~</h1>
+    <ul>
+      <% for film in @films %>
+      <h2><li><a href="/films/<%= film.id %>"><%= film.title %></a></li></h2>
+      <% end %>
+    </ul>
+  </body>
+</html>
